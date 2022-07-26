@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./styles.css" />
+        <title>Snake Game</title>
     </head>
-    <body>
 
+    <body>
+        <canvas id="canvas" width="1024" height="1024"></canvas>
+        <script>
+            var game = {
+                board: [
+                    "###############",
+                    "#             #",
+                    "#             #",
+                    "#             #",
+                    "#    ####     #",
+                    "#    ####     #",
+                    "#             #",
+                    "#             #",
+                    "#             #",
+                    "###############"
+                ]
+            }
+
+            var graphics = {
+                canvas: document.getElementById("canvas"),
+                squareSize: 30,
+                drawBoard: function() {
+                    var ctx = graphics.canvas.getContext("2d");
+                    var currentYoffset = 0;
+                    game.board.forEach(function checkLine(line) {
+                    line = line.split('');
+                    var currentXoffset = 0;
+                    line.forEach(function checkCharacter(character) {
+                        if(character == '#') {
+                            ctx.fillStyle = "black";
+                            ctx.fillRect(currentXoffset, currentYoffset, graphics.squareSize, graphics.squareSize);
+                        }
+                        currentXoffset += graphics.squareSize;
+                    });
+                    currentYoffset += graphics.squareSize;
+                    })
+                }
+            }
+
+            graphics.drawBoard();
+
+        </script>
     </body>
+
 </html>
